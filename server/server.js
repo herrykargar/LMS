@@ -14,7 +14,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: ["http://localhost:3000", "https://0dvlp9zz-3000.inc1.devtunnels.ms"],
+    origin: process.env.CLIENT_URL || "*",
     credentials: true,
 }));
 app.use(express.json());
@@ -43,9 +43,11 @@ app.use((err, req, res, next) => {
     res.status(500).json({ message: err.message || "Server Error" });
 });
 
-const PORT = process.env.PORT || 5050;
+if (process.env.NODE_ENV !== "production") {
+    const PORT = process.env.PORT || 5050;
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
+}
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-
-});
+module.exports = app;

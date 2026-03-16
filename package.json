@@ -1,5 +1,13 @@
 {
+  "scripts": {
+    "build": "npm run build --prefix client",
+    "start": "npm start --prefix server",
+    "dev": "concurrently \"npm run dev --prefix client\" \"npm run dev --prefix server\""
+  },
   "dependencies": {
     "marked": "^17.0.4"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
   }
 }
