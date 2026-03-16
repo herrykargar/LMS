@@ -1,6 +1,10 @@
 {
+  "workspaces": [
+    "client",
+    "server"
+  ],
   "scripts": {
-    "build": "npm run build --prefix client",
+    "build": "npm run build -w client",
     "start": "npm start --prefix server",
     "dev": "concurrently \"npm run dev --prefix client\" \"npm run dev --prefix server\""
   },
