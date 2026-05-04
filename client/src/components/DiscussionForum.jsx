@@ -293,7 +293,7 @@ const DiscussionForum = ({ courseId, isInstructor }) => {
                                         </div>
 
                                         {/* Add Reply Form */}
-                                        <div className="pl-6 ml-[2px]">
+                                        <div className="pl-6 ml-0.5">
                                             <form onSubmit={(e) => handleAddReply(e, discussion._id)} className="flex gap-3">
                                                 <input
                                                     type="text"
