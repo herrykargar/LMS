@@ -10,6 +10,8 @@ import {
     FiBriefcase,
     FiUpload,
     FiCheckCircle,
+    FiEye,
+    FiEyeOff,
 } from "react-icons/fi";
 import { toast } from "react-toastify";
 
@@ -23,6 +25,7 @@ const ApplyInstructor = () => {
     });
     const [avatar, setAvatar] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const navigate = useNavigate();
 
@@ -49,7 +52,7 @@ const ApplyInstructor = () => {
 
     if (submitted) {
         return (
-            <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-amber-50 via-white to-slate-100">
+            <div className="min-h-screen flex items-center justify-center px-4 bg-linear-to-br from-amber-50 via-white to-slate-100">
                 <div className="w-full max-w-md text-center">
                     <div className="bg-white border border-slate-200 rounded-3xl p-12 shadow-xl">
                         <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6 border border-green-100">
@@ -75,13 +78,13 @@ const ApplyInstructor = () => {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-amber-50 via-white to-slate-100 py-12">
+        <div className="min-h-screen flex items-center justify-center px-4 bg-linear-to-br from-amber-50 via-white to-slate-100 py-12">
             <div className="w-full max-w-lg">
                 {/* Header */}
                 <div className="text-center mb-8">
                     <div className="inline-flex items-center gap-2 text-3xl font-bold mb-2">
                         <FiBookOpen className="text-amber-600" />
-                        <span className="bg-gradient-to-r from-amber-600 to-amber-800 bg-clip-text text-transparent">
+                        <span className="bg-linear-to-r from-amber-600 to-amber-800 bg-clip-text text-transparent">
                             Learnify
                         </span>
                     </div>
@@ -93,7 +96,7 @@ const ApplyInstructor = () => {
 
                 {/* Form Card */}
                 <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-xl relative overflow-hidden">
-                    <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-amber-500 to-amber-700 rounded-l-3xl" />
+                    <div className="absolute top-0 left-0 w-1.5 h-full bg-linear-to-b from-amber-500 to-amber-700 rounded-l-3xl" />
 
                     <form onSubmit={handleSubmit} className="space-y-5">
                         {/* Name */}
@@ -140,14 +143,22 @@ const ApplyInstructor = () => {
                             <div className="relative">
                                 <FiLock className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
                                 <input
-                                    type="password"
+                                    type={showPassword ? "text" : "password"}
                                     required
                                     minLength={6}
                                     value={form.password}
                                     onChange={(e) => setForm({ ...form, password: e.target.value })}
-                                    className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:bg-white transition-all"
+                                    className="w-full pl-10 pr-10 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:bg-white transition-all"
                                     placeholder="Min. 6 characters"
                                 />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors cursor-pointer"
+                                    tabIndex={-1}
+                                >
+                                    {showPassword ? <FiEyeOff /> : <FiEye />}
+                                </button>
                             </div>
                         </div>
 

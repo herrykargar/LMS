@@ -1,13 +1,14 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { loginUser } from "../../services/api";
-import { FiMail, FiLock, FiBookOpen } from "react-icons/fi";
+import { FiMail, FiLock, FiBookOpen, FiEye, FiEyeOff } from "react-icons/fi";
 import { toast } from "react-toastify";
 
 const Login = () => {
     const [form, setForm] = useState({ email: "", password: "" });
     const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     const { login } = useAuth();
     const navigate = useNavigate();
 
@@ -70,15 +71,23 @@ const Login = () => {
                             <div className="relative">
                                 <FiLock className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
                                 <input
-                                    type="password"
+                                    type={showPassword ? "text" : "password"}
                                     required
                                     value={form.password}
                                     onChange={(e) =>
                                         setForm({ ...form, password: e.target.value })
                                     }
-                                    className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-colors"
+                                    className="w-full pl-10 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-colors"
                                     placeholder="Enter your password"
                                 />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors cursor-pointer"
+                                    tabIndex={-1}
+                                >
+                                    {showPassword ? <FiEyeOff /> : <FiEye />}
+                                </button>
                             </div>
                         </div>
 
